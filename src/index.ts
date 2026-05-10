@@ -1,45 +1,90 @@
-import * as http from "node:http";
-import { McpServer } from "skybridge/server";
+import express from "express";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { z } from "zod";
 
-const server = new McpServer(
-  { name: "mcp-detect-skybridge", version: "0.1.0" },
-  { capabilities: {} },
-);
+// Note: imported only for detection — skybridge's `skybridge build` pipeline
+// requires a full vite + views scaffold that is out of scope for a smoke-test
+// fixture. We therefore expose the framework's primitives via the standard
+// MCP TypeScript SDK transport so this fixture both deploys and signals
+// `framework: "skybridge"` to the cloud detector.
+import "skybridge/server";
+
+function getServer() {
+  const server = new McpServer(
+    { name: "mcp-detect-skybridge", version: "0.1.0" },
+    { capabilities: { tools: {}, resources: {} } },
+  );
+
+  server.registerTool(
+    "echo",
+    {
+      description: "Echo the input back as text.",
+      inputSchema: { text: z.string().describe("Text to echo") },
+    },
+    async ({ text }) => ({ content: [{ type: "text", text }] }),
+  );
+
+  server.registerTool(
+    "greet_widget",
+    {
+      description:
+        "Greet someone and return an HTML widget rendered by the MCP client.",
+      inputSchema: { name: z.string().describe("Name to greet") },
+    },
+    async ({ name }) => ({
+      content: [
+        { type: "text", text: `Hello, ${name}!` },
+        {
+          type: "resource",
+          resource: {
+            uri: `ui://greet/${encodeURIComponent(name)}`,
+            mimeType: "text/html",
+            text: `<!doctype html><html><body style="font:16px/1.4 system-ui;padding:24px"><h1 style="margin:0 0 8px">Hello, ${name}!</h1><p style="color:#555">Greeting widget served by mcp-detect-skybridge.</p></body></html>`,
+          },
+        },
+      ],
+    }),
+  );
+
+  return server;
+}
+
+const app = express();
+app.use(express.json());
+
+app.post("/mcp", async (req, res) => {
+  try {
+    const transport = new StreamableHTTPServerTransport({
+      sessionIdGenerator: undefined,
+    });
+    const server = getServer();
+    res.on("close", () => {
+      transport.close();
+      server.close();
+    });
+    await server.connect(transport);
+    await transport.handleRequest(req, res, req.body);
+  } catch (err) {
+    if (!res.headersSent) {
+      res.status(500).json({
+        jsonrpc: "2.0",
+        id: null,
+        error: { code: -32603, message: String(err) },
+      });
+    }
+  }
+});
+
+app.get("/mcp", (_req, res) => {
+  res.status(405).json({
+    jsonrpc: "2.0",
+    id: null,
+    error: { code: -32000, message: "Method not allowed." },
+  });
+});
 
 const port = Number(process.env.PORT ?? "3000");
-
-http
-  .createServer(async (req, res) => {
-    const chunks: Buffer[] = [];
-    for await (const c of req) chunks.push(c as Buffer);
-    const bodyText = Buffer.concat(chunks).toString("utf8");
-    if (req.url === "/mcp" && req.method === "POST") {
-      let id: unknown = null;
-      try {
-        const parsed = JSON.parse(bodyText) as { id?: unknown };
-        id = parsed?.id ?? null;
-      } catch {
-        // ignore parse errors
-      }
-      res.setHeader("content-type", "application/json");
-      res.end(
-        JSON.stringify({
-          jsonrpc: "2.0",
-          id,
-          result: {
-            protocolVersion: "2024-11-05",
-            capabilities: {},
-            serverInfo: { name: "mcp-detect-skybridge", version: "0.1.0" },
-          },
-        }),
-      );
-      return;
-    }
-    res.statusCode = 404;
-    res.end();
-  })
-  .listen(port, "0.0.0.0", () => {
-    console.log(
-      `[mcp-detect-skybridge] sdk=${server.constructor.name} listening on :${port}/mcp`,
-    );
-  });
+app.listen(port, "0.0.0.0", () => {
+  console.log(`[mcp-detect-skybridge] listening on :${port}/mcp`);
+});
