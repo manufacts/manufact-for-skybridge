@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  font: 16px/1.4 system-ui, sans-serif;
+}
+
+.card {
+  background: linear-gradient(160deg, #f0f4ff 0%, #dbe3ff 100%);
+  color: #101032;
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  max-width: 32rem;
+}
+
+.card h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.card p {
+  margin: 0;
+  opacity: 0.75;
+  font-size: 13px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: linear-gradient(160deg, #1a1a2e 0%, #2a2a3e 100%);
+    color: #e0e0ff;
+  }
+}

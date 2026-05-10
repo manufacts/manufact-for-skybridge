@@ -2,22 +2,34 @@
   "name": "mcp-detect-skybridge",
   "version": "0.1.0",
   "private": true,
+  "description": "Smoke-test fixture for skybridge framework detection.",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "dev": "skybridge dev",
+    "dev:tunnel": "skybridge dev --tunnel",
+    "build": "skybridge build",
+    "start": "skybridge start",
+    "deploy": "alpic deploy"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.27.0",
-    "express": "^5.0.0",
-    "skybridge": "^0.36.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "zod": "^3.23.0"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "skybridge": ">=0.36.2",
+    "vite": "^8.0.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "typescript": "^5.4.0",
-    "@types/node": "^22.0.0",
-    "@types/express": "^5.0.0"
+    "@skybridge/devtools": ">=0.35.14 <1.0.0",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "alpic": "^1.104.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  },
+  "engines": {
+    "node": ">=24.14.1"
   }
 }
