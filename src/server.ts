@@ -5,6 +5,7 @@ const server = new McpServer(
   {
     name: "mcp-detect-skybridge",
     version: "0.1.0",
+    description: "Smoke-test fixture for Skybridge framework detection (MCP Apps).",
   },
   { capabilities: {} },
 )
