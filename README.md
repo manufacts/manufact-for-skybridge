@@ -1,4 +1,4 @@
-[![Deploy to mcp-use](https://cdn.mcp-use.com/deploy.svg)](https://mcp-use.com/deploy/start?repository-url=https%3A%2F%2Fgithub.com%2Fmanufacts%2Fmcp-detect-skybridge&branch=main&project-name=mcp-detect-skybridge&port=3000&runtime=node&base-image=node%3A24)
+[![Deploy to mcp-use](https://cdn.mcp-use.com/deploy.svg)](https://mcp-use.com/deploy/start?repository-url=https%3A%2F%2Fgithub.com%2Fmanufacts%2Fmanufact-for-skybridge&branch=main&project-name=manufact-for-skybridge&port=3000&runtime=node&base-image=node%3A24)
 
 <div align="center">
 
@@ -16,7 +16,7 @@ Built with [`skybridge`](https://github.com/alpic-ai/skybridge) — React views 
 
 ## Deploy to Manufact Cloud
 
-Click the badge above, or open the [one-click deploy flow](https://mcp-use.com/deploy/start?repository-url=https%3A%2F%2Fgithub.com%2Fmanufacts%2Fmcp-detect-skybridge&branch=main&project-name=mcp-detect-skybridge&port=3000&runtime=node&base-image=node%3A24). Sign in, connect GitHub, and Manufact clones this repo into your account and deploys it.
+Click the badge above, or open the [one-click deploy flow](https://mcp-use.com/deploy/start?repository-url=https%3A%2F%2Fgithub.com%2Fmanufacts%2Fmanufact-for-skybridge&branch=main&project-name=manufact-for-skybridge&port=3000&runtime=node&base-image=node%3A24). Sign in, connect GitHub, and Manufact clones this repo into your account and deploys it.
 
 If you deploy manually from the dashboard instead:
 
@@ -60,8 +60,8 @@ Open `http://localhost:3000/mcp`.
 Or build and run with Docker:
 
 ```bash
-docker build -t mcp-detect-skybridge .
-docker run -p 3000:3000 mcp-detect-skybridge
+docker build -t manufact-for-skybridge .
+docker run -p 3000:3000 manufact-for-skybridge
 ```
 
 ---
