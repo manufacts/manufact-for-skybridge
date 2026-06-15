@@ -8,7 +8,7 @@
 
 Built with [`skybridge`](https://github.com/alpic-ai/skybridge) — React views with dual-runtime emission (MCP Apps + ChatGPT Apps SDK).
 
-**Live demo:** [`calm-pulse-tt2fj.run.mcp-use.com/mcp`](https://calm-pulse-tt2fj.run.mcp-use.com/mcp)
+**Live demo:** [`warm-steel-j4uhd.run.mcp-use.com/mcp`](https://warm-steel-j4uhd.run.mcp-use.com/mcp)
 
 </div>
 
