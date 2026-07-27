@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.7",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "skybridge": ">=0.36.4",
     "vite": "^8.1.5",
     "zod": "^4.3.6"
@@ -24,8 +24,8 @@
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "alpic": "^1.155.0",
+    "@vitejs/plugin-react": "^6.0.4",
+    "alpic": "^1.158.0",
     "tsx": "^4.23.1",
     "typescript": "^6.0.2"
   },
