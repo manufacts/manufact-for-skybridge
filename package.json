@@ -12,20 +12,20 @@
     "deploy": "alpic deploy"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.1",
+    "@modelcontextprotocol/sdk": "^1.31.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "skybridge": ">=0.36.4",
-    "vite": "^8.3.1",
+    "vite": "^8.3.2",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@skybridge/devtools": ">=0.35.14 <1.0.0",
-    "@types/node": "^24.13.6",
+    "@types/node": "^24.19.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
-    "alpic": "^1.174.1",
+    "alpic": "^1.176.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.2"
   },
